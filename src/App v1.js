@@ -53,10 +53,21 @@ const average = (arr) =>
 
 const KEY = "ccd62659";
 export default function App() {
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const query = "interstellar";
+  const tempQuery = "interstellar";
+
+  useEffect(function () {
+    console.log("A");
+  }, []);
+
+  useEffect(function () {
+    console.log("B");
+  });
+
+  console.log("C");
 
   useEffect(function () {
     async function fetchMovies() {
@@ -74,7 +85,7 @@ export default function App() {
   return (
     <>
       <NavBar>
-        <Search />
+        <Search query={query} setQuery={setQuery} />
         <NumResults movies={movies} />
       </NavBar>
       <Main>
@@ -118,8 +129,7 @@ function NumResults({ movies }) {
   );
 }
 
-function Search() {
-  const [query, setQuery] = useState("");
+function Search({ query, setQuery }) {
   return (
     <input
       className="search"
